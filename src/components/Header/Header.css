@@ -1,0 +1,13 @@
+.header__logo {
+  margin-right: 10px;
+  vertical-align: middle;
+  width: 40px;
+}
+.header__title {
+  color: #fff;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  vertical-align: middle;
+}
