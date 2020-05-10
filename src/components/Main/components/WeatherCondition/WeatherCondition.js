@@ -1,7 +1,7 @@
 import React from "react";
-import Umberella from "../../../../Assets/icon-umberella.png";
-import Wind from "../../../../Assets/icon-wind.png";
-import Compass from "../../../../Assets/icon-compass.png";
+import Umbrella from "../../../../assets/icon-umbrella.png";
+import Wind from "../../../../assets/icon-wind.png";
+import Compass from "../../../../assets/icon-compass.png";
 import "./WeatherCondition.css";
 
 class WeatherCondition extends React.Component {
@@ -13,7 +13,7 @@ class WeatherCondition extends React.Component {
         <div className="weather-condition__temp">{this.props.max} c</div>
         <div className="weather-condition__desc">
           <div>
-            <img src={Umberella} alt="Umberella" />
+            <img src={Umbrella} alt="Umbrella" />
             <span className="citem">{this.props.humidity}</span>
           </div>
           <div>
