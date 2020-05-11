@@ -6,9 +6,10 @@ import "./WeatherForecast.css";
 
 class WeatherForecast extends React.Component {
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     const limit = this.props.limit;
     const forecasts = this.props.forecasts.slice(0, limit);
+    const unit = this.props.unit;
     return (
       <section className="weather-forecast">
         <div className="forecast__switch">
@@ -37,9 +38,10 @@ class WeatherForecast extends React.Component {
             <ForecastRow
               key={forecast.time}
               day={day}
-              high={forecast.maxCelsius}
-              low={forecast.minCelsius}
+              high={unit === "c" ? forecast.maxCelsius : forecast.maxFahrenheit}
+              low={unit === "c" ? forecast.minCelsius : forecast.minFahrenheit}
               time={time}
+              unit={unit}
             />
           );
         })}

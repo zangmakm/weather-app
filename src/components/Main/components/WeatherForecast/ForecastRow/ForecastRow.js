@@ -11,8 +11,12 @@ class ForecastRow extends React.Component {
             <i className="fa fa-clock-o"></i>
             {this.props.time}
           </span>
-          <span className="weather-forecast__high">{this.props.high} c</span>
-          <span className="weather-forecast__low">{this.props.low} c</span>
+          <span className="weather-forecast__high">
+            {this.props.high} {this.props.unit.toUpperCase()}
+          </span>
+          <span className="weather-forecast__low">
+            {this.props.low} {this.props.unit.toUpperCase()}
+          </span>
         </div>
       </div>
     );

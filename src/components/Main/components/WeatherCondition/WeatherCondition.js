@@ -10,7 +10,9 @@ class WeatherCondition extends React.Component {
       <section className="weather-condition">
         <div className="weather-condition__location">{this.props.city}</div>
         <div style={{ textAlign: "center", fontSize: "14px" }}>Clear</div>
-        <div className="weather-condition__temp">{this.props.max} c</div>
+        <div className="weather-condition__temp">
+          {this.props.max} {this.props.unit.toUpperCase()}
+        </div>
         <div className="weather-condition__desc">
           <div>
             <img src={Umbrella} alt="Umbrella" />
