@@ -1,5 +1,10 @@
 import React from "react";
 import "./SearchBar.css";
+import { connect } from "react-redux";
+import {
+  change_input_value,
+  handle_unit,
+} from "../../redux/actions/searchbarAction";
 
 class SearchBar extends React.Component {
   render() {
@@ -8,7 +13,7 @@ class SearchBar extends React.Component {
         <div style={{ flex: 1 }}>
           <input
             className="search-input"
-            onChange={this.props.changeCity}
+            onChange={(event) => this.props.changeCity(event.target.value)}
             value={this.props.input}
           />
           <button
@@ -19,7 +24,7 @@ class SearchBar extends React.Component {
             <i className="fa fa-search"></i>
           </button>
 
-          <button className="temp-switch" onClick={this.props.handleUnit}>
+          <button className="temp-switch" onClick={this.props.handle_unit}>
             <i
               className="fa fa-thermometer-empty"
               aria-hidden="true"
@@ -34,4 +39,14 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+const mapStateToProps = (state) => ({
+  input: state.searchbar.input,
+  unit: state.searchbar.unit,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity: (input) => dispatch(change_input_value(input)),
+  handle_unit: () => dispatch(handle_unit()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

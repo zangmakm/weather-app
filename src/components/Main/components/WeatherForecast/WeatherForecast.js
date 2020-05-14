@@ -1,12 +1,12 @@
 import React from "react";
 import ForecastRow from "./ForecastRow";
 import { format } from "date-fns";
-
+import { connect } from "react-redux";
 import "./WeatherForecast.css";
+import { changeLimit } from "../../../../redux/actions/weatherAction";
 
 class WeatherForecast extends React.Component {
   render() {
-    //console.log(this.props);
     const limit = this.props.limit;
     const forecasts = this.props.forecasts.slice(0, limit);
     const unit = this.props.unit;
@@ -50,4 +50,14 @@ class WeatherForecast extends React.Component {
   }
 }
 
-export default WeatherForecast;
+const mapStateToProps = (state) => ({
+  unit: state.searchbar.unit,
+  limit: state.weather.limit,
+  forecasts: state.weather.forecasts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeLimit: (limit) => dispatch(changeLimit(limit)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherForecast);
