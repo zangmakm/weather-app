@@ -3,36 +3,29 @@ import Header from "../Header";
 import SearchBar from "../SearchBar";
 import Main from "../Main";
 import Footer from "../Footer";
+import Loader from "../Loader";
+import Error from "../Error";
 import "./App.css";
-import { getWeatherData } from "../../utils/axios";
 import { connect } from "react-redux";
-import { getWeather } from "../../redux/actions/weatherAction";
+import { loadWeather } from "../../redux/actions/searchbarAction";
 
 class App extends React.Component {
   componentDidMount() {
-    getWeatherData("brisbane").then(this.updateWeather);
+    this.props.getWeather("brisbane");
   }
-
-  updateWeather = (data) => {
-    const weather = {
-      city: data.city,
-      current: data.current,
-      forecasts: data.forecast.slice(0, 10),
-    };
-    //console.log(weather);
-    this.props.getWeather(weather);
-  };
-
-  handleSearch = () => {
-    getWeatherData(this.props.input).then(this.updateWeather);
-  };
 
   render() {
     return (
       <div className="weather-channel__container">
         <Header />
-        <SearchBar handleSearch={this.handleSearch} />
-        <Main />
+        <SearchBar />
+        {this.props.isLoading ? (
+          <Loader />
+        ) : this.props.error ? (
+          <Error />
+        ) : (
+          <Main />
+        )}
         <Footer />
       </div>
     );
@@ -40,11 +33,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  input: state.searchbar.input,
+  isLoading: state.weather.isLoading,
+  error: state.weather.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getWeather: (weather) => dispatch(getWeather(weather)),
+  getWeather: (city) => dispatch(loadWeather(city)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

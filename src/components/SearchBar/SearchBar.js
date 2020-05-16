@@ -2,8 +2,9 @@ import React from "react";
 import "./SearchBar.css";
 import { connect } from "react-redux";
 import {
-  change_input_value,
-  handle_unit,
+  changeInputValue,
+  handleUnit,
+  loadWeather,
 } from "../../redux/actions/searchbarAction";
 
 class SearchBar extends React.Component {
@@ -19,12 +20,12 @@ class SearchBar extends React.Component {
           <button
             type="submit"
             className="search-btn"
-            onClick={this.props.handleSearch}
+            onClick={() => this.props.handleSearch(this.props.input)}
           >
             <i className="fa fa-search"></i>
           </button>
 
-          <button className="temp-switch" onClick={this.props.handle_unit}>
+          <button className="temp-switch" onClick={this.props.handleUnit}>
             <i
               className="fa fa-thermometer-empty"
               aria-hidden="true"
@@ -45,8 +46,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity: (input) => dispatch(change_input_value(input)),
-  handle_unit: () => dispatch(handle_unit()),
+  changeCity: (input) => dispatch(changeInputValue(input)),
+  handleUnit: () => dispatch(handleUnit()),
+  handleSearch: (city) => dispatch(loadWeather(city)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
